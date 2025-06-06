@@ -6,9 +6,10 @@ $db_name = 'phpdb';
 
 //Establishes the connection
 $conn = mysqli_init();
-mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306);
+mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
+mysqli_real_connect($conn, 'phpdb.mysql.database.azure.com', 'dbadmin', 'M!ke0rBr$ak1234', 'phpdb', 3306, MYSQLI_CLIENT_SSL);
 if (mysqli_connect_errno($conn)) {
-die('Failed to connect to MySQL: '.mysqli_connect_error());
+  die('Failed to connect to MySQL: '.mysqli_connect_error());
 }
 
 // Run the create table query
