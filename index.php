@@ -1,28 +1,29 @@
 <?php
-$servername = "phpdb.mysql.database.azure.com";
-$username = "dbadmin";
-$password = "M!ke0rBr$ak1234";
-$database = "phpdb";
+$host = 'phpdb.mysql.database.azure.com';
+$username = 'dbadmin';
+$password = 'M!ke0rBr$ak1234';
+$db_name = 'phpdb';
 
-// Create connection
-// $conn = new mysqli($servername, $username, $password, $database);
-
+//Establishes the connection
 $conn = mysqli_init();
-mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootG2.crt.pem", NULL, NULL);
-mysqli_real_connect($conn, $servername, $username, $password, $database, 3306, MYSQLI_CLIENT_SSL);
-
-// Check connection
-// if ($conn->connect_error) {
-//    die("Connection failed: " . $conn->connect_error);
-// }
+mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306);
 if (mysqli_connect_errno($conn)) {
-  die('Failed to connect to MySQL: '.mysqli_connect_error());
+die('Failed to connect to MySQL: '.mysqli_connect_error());
 }
 
-echo "Connected to the database successfully!";
+// Run the create table query
+if (mysqli_query($conn, '
+CREATE TABLE Products (
+`Id` INT NOT NULL AUTO_INCREMENT ,
+`ProductName` VARCHAR(200) NOT NULL ,
+`Color` VARCHAR(50) NOT NULL ,
+`Price` DOUBLE NOT NULL ,
+PRIMARY KEY (`Id`)
+);
+')) {
+printf("Table created\n");
+}
 
-// Perform database operations here...
-
-// Close the connection
-$conn->close();
+//Close the connection
+mysqli_close($conn);
 ?>
