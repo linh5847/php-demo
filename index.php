@@ -6,7 +6,7 @@ $db_name = 'phpdb';
 
 //Establishes the connection
 $conn = mysqli_init();
-mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
+mysqli_ssl_set($conn,NULL,NULL, "/home/site/wwwroot/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
 mysqli_real_connect($conn, 'phpdb.mysql.database.azure.com', 'dbadmin', 'M!ke0rBr$ak1234', 'phpdb', 3306, MYSQLI_CLIENT_SSL);
 if (mysqli_connect_errno($conn)) {
   die('Failed to connect to MySQL: '.mysqli_connect_error());
