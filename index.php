@@ -1,4 +1,3 @@
-//  <?php echo("Hello World"); ?>
 <?php
 $servername = "phpdb.mysql.database.azure.com";
 $username = "dbadmin";
